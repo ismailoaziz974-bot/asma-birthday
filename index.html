@@ -75,10 +75,27 @@
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.45);
         }
 
-        .glass-panel-hover:hover {
-            border-color: rgba(255, 117, 140, 0.55);
-            box-shadow: 0 18px 40px -5px rgba(255, 77, 141, 0.3);
-        }
+      .glass-panel {
+    background: rgba(25, 12, 45, 0.35) !important; /* تەڵخی و ڕەنگەکەی کەمتر کراوە تا وێنەکە لە پشتەوە دەربکەوێت */
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 117, 140, 0.25) !important;
+    box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.45);
+}
+body {
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    background-image: linear-gradient(rgba(11, 5, 24, 0.45), rgba(11, 5, 24, 0.55)), url('./neyma.html/asma6.jpg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 130% 130%; /* ئەمە وادەکات بە تەواوی چوارچێوەی شاشەکە بگرێت */
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #f8fafc;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
 
         /* Hide scrollbars */
         ::-webkit-scrollbar {
@@ -107,8 +124,15 @@
     </style>
 </head>
 <body class="relative min-h-screen selection:bg-romantic-rose selection:text-white">
-  
    
+    <!-- Background Music Audio Tag -->
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="./neyma.html/taman - Sana Barzanje.mp3" type="audio/mpeg">
+</audio>
+
+
+
 
   
     <!-- Ambient Glowing Particle Canvas Background -->
@@ -125,7 +149,7 @@
         <header class="w-full max-w-4xl flex items-center justify-between py-4 mb-6 flex-wrap gap-3">
             <div class="flex items-center gap-2 text-rose-300/90 text-sm tracking-wide font-medium bg-rose-950/40 border border-rose-500/20 px-4 py-1.5 rounded-full backdrop-blur-md">
                 <span class="inline-block w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
-                <span>تایبەت بۆ خۆشەویستترین ئاسما</span>
+                <span>تایبەتە بۆ ڕوحێ </span>
             </div>
             
             <div class="flex items-center gap-3">
@@ -262,7 +286,7 @@
                 </div>
 
                 <div class="mt-8 pt-4 border-t border-rose-500/20 flex justify-between items-center">
-                    <span class="text-xs text-rose-400/80">خۆشەویستەکەت کە بێ سنوور خۆشی دەوێیت</span>
+                    <span class="text-xs text-rose-400/80">خۆشەویستەکەت بێ سنوور خۆشی دەوێیت</span>
                     <button onclick="triggerConfettiShower(); playSoftChime();" class="px-4 py-2 rounded-xl bg-rose-600/40 hover:bg-rose-500/60 text-xs font-semibold text-white transition-all">
                         بارانی گوڵ و دڵ 💖
                     </button>
@@ -351,7 +375,7 @@
         <!-- ================= SWEET MEMORIES GALLERY (بە وێنەکانی ئاسما گیان) ================= -->
         <section class="w-full max-w-4xl my-16">
             <div class="text-center mb-10">
-                <span class="text-xs uppercase tracking-widest text-rose-400 font-semibold px-3 py-1 rounded-full bg-rose-950/60 border border-rose-500/20">گەنجینەی دڵمان</span>
+                <span class="text-xs uppercase tracking-widest text-rose-400 font-semibold px-3 py-1 rounded-full bg-rose-950/60 border border-rose-500/20">گەنجینەی دڵم  </span>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">یادگارییە جوانەکانمان</h2>
                 <p class="text-rose-200/70 text-sm mt-1">ئەو چرکەساتانەی بۆ هەتاهەتایە لە بیرەوەریماندا بە درەوشاوەیی دەمێننەوە</p>
             </div>
@@ -408,7 +432,10 @@
         <!-- Footer -->
         <footer class="w-full max-w-4xl text-center py-8 text-rose-300/50 text-xs border-t border-rose-500/10 mt-12">
             <p>دروستکراوە بە تایبەت لەلایەن کەسێکەوە کە بێ کۆتایی خۆشی دەوێیت • بۆ ساڵیادی ئاسما خان</p>
-            <p class="mt-1">Happy Birthday Asma — Forever & Always ✨</p>
+            <p class="mt-1">Happy Birthday Asma — Forever & Always ✨
+<br>خۆشمدەوێ ڕوحەکەم ❤
+<br>ئیسۆ
+            </p>
         </footer>
 
     </div>
@@ -435,6 +462,27 @@
 
     <!-- ================= AUDIO & INTERACTION JAVASCRIPT ================= -->
     <script>
+
+        
+// لێدانی ساوند لەگەڵ یەکەم تاچ یان کلیک
+const bgMusic = document.getElementById('bgMusic');
+
+function playOnFirstInteraction() {
+    if (bgMusic) {
+        bgMusic.play().then(() => {
+            // کاتێک دەستی پێکرد، چیتر گوێگری کلیک نامێنێت
+            window.removeEventListener('click', playOnFirstInteraction);
+            window.removeEventListener('touchstart', playOnFirstInteraction);
+        }).catch(err => {
+            console.log('چاوەڕێی دەست لێدانی بەکارهێنەرە: ', err);
+        });
+    }
+}
+
+// زیادکردنی گوێگر بۆ کلیک یان تاچ لەسەر تەواوی شاشەکە
+window.addEventListener('click', playOnFirstInteraction, { once: true });
+window.addEventListener('touchstart', playOnFirstInteraction, { once: true });
+
         let audioCtx = null;
         let soundEnabled = true;
 
@@ -912,6 +960,8 @@
             initParticles();
             animateCanvas();
         };
+
+        
     </script>
 </body>
 </html>
